@@ -1,0 +1,6 @@
+{
+    "name": "dev/blog_site",
+    "require": {
+        "fzaninotto/faker": "^1.9"
+    }
+}

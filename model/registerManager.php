@@ -8,10 +8,10 @@ if (!function_exists('adduser')) {
         $q = $db->prepare("INSERT INTO users(name, username, email, password)
                           VALUES(:name, :username, :email, :password)");
         $q->execute([
-        'name'     => $_POST['name'],
-        'username' => $_POST['username'],
-        'email'    => $_POST['email'],
-        'password' => sha1($_POST['password'])
+        'name'     => e($_POST['name']),
+        'username' => e($_POST['username']),
+        'email'    => e($_POST['email']),
+        'password' => password_hash($_POST['password'], PASSWORD_BCRYPT, array($options = 12))
         ]);
     }
 }

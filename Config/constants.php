@@ -8,6 +8,7 @@ define('ROOT', $root);
 define('CONTROLLER', ROOT.'/controller/');
 define('VIEW', ROOT.'/view/');
 define('MODEL', ROOT.'/model/');
+define('UPLOADS', ROOT.'/uploads/');
 define('ASSETS', HOST.'/assets/');
 define('WEBSITE_NAME', 'Blog');
 define('WEBSITE_URL', 'http://'.$host);

@@ -11,9 +11,12 @@ if (isset($_POST['register'])) {
         $name             = e($_POST['name']);
         $username         = e($_POST['username']);
         $email            = e($_POST['email']);
-        $password         = password_hash($_POST['password'], PASSWORD_BCRYPT, array($options = 12));
-        $password_confirm = e($_POST['password_confirm']);
+        $password         = htmlspecialchars($_POST['password']);
+        $password_confirm = htmlspecialchars($_POST['password_confirm']);
 
+        // var_dump($password, $password_confirm);
+        // die();        
+        
         if (mb_strlen($username) < 3) {
             $errors[] = "Pseudo trop court (Minimum 3 caractères)";
         }
@@ -48,7 +51,7 @@ if (isset($_POST['register'])) {
             $to = MAIL_ADMIN;
             $subject = WEBSITE_NAME . " - ACTIVATION DE COMPTE";
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT, array($options = 12));
-            $token = sha1($_POST['username'] . $_POST['email'] . $password);
+            $token = sha1($_POST['pseudo'] . $_POST['email'] . $password);
             
 
             ob_start();

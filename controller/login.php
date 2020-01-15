@@ -9,9 +9,10 @@ if (isset($_POST['login'])) {
     if (not_empty(['identifiant', 'password'])) {
         $errors = [];
         $identifiant = e($_POST['identifiant']);
-        $password = sha1(e($_POST['password']));
+        $password = htmlspecialchars($_POST['password']);
         $user = verifyLogin();
-        // var_dump($password);
+
+        // var_dump($password, $user);
         // die();
         if ($user) {                       
 

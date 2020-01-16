@@ -5,6 +5,7 @@ $host = $_SERVER['HTTP_HOST'];
 define('HOST', 'http://'.$host);
 define('ROOT', $root);
 
+define('ADMIN', ROOT.'/admin/');
 define('CONTROLLER', ROOT.'/controller/');
 define('VIEW', ROOT.'/view/');
 define('MODEL', ROOT.'/model/');

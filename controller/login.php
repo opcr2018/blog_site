@@ -14,13 +14,12 @@ if (isset($_POST['login'])) {
 
         // var_dump($password, $user);
         // die();
-        if ($user) {                       
-
+        if ($user) {
             $_SESSION['user_id']  = $user->id;
             $_SESSION['username'] = $user->username;
             $_SESSION['email']    = $user->email;
             $_SESSION['avatar']   = $user->avatar;
-            
+            $_SESSION['manager']  = $user->manager;
 
             redirect_intent_or('profil&id='.get_session('user_id'));
         } else {

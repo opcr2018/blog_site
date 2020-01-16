@@ -5,7 +5,7 @@
         function verifyLogin()
         {
             $db = getConnect();
-            $q = $db->prepare("SELECT id, username, email, password AS pass FROM users 
+            $q = $db->prepare("SELECT id, username, email, manager, password AS pass FROM users 
                    WHERE (username = :identifiant OR email = :identifiant)
                    AND active = '1'");
             $q->execute([

@@ -6,12 +6,13 @@ $post = getPost($_GET['id']);
 
 if (isset($_POST['edit']) ) {
     //if fields have been fullfilled
-    if (not_empty(['title','detail','postContent'])) {
+    if (not_empty(['title','detail','statut', 'postContent'])) {
         $errors = [];
              
         $title          = e($_POST['title']);
         $detail         = e($_POST['detail']);
         $postContent    = e($_POST['postContent']);
+        $statut         = e($_POST['statut']);
 
         updatePost();
 

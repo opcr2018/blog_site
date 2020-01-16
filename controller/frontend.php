@@ -143,6 +143,7 @@ if (!function_exists('filter_loath')) {
     }
 }
 
+
 //redirect friendly
 if (!function_exists('redirect_intent_or')) {
     function redirect_intent_or($default_url)

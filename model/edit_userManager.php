@@ -13,9 +13,10 @@ if (!function_exists('updateUser')) {
             'city'        => e($_POST['city']),
             'country'     => e($_POST['country']),
             'twitter'     => e($_POST['twitter']),
-            'github'      => e($_POST['github']),
+            'github'      => e($_POST['github']),            
             'bio'         => e($_POST['bio']),
             'id'          => get_session('user_id')
+            
          ]);
     }
 }

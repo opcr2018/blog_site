@@ -11,31 +11,40 @@
 
             <!-- Name field -->
             <div class="row">
-                <div class="form-group col-md-12"> 
+                <div class="form-group col-md-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="statut" id="statut" value="1">
+                        <label class="form-check-label" for="statut">
+                            Publié
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
                     <label class="control-label" for="linkImg">Illustration </label><br />
-                    <input type="url" value="<?= $post->img ?>"class="form-control" id="linkImg" name="linkImg" />
+                    <input type="url" value="<?= $post->img ?>"
+                        class="form-control" id="linkImg" name="linkImg" />
                 </div>
                 <div class="form-group col-md-12">
                     <label class="control-label" for="title">Titre <span class="text-danger">*</span></label>
-                    <input type="text"
-                        value="<?= $post->title; ?>"
-                        class="form-control" id="title" name="title" required="required"/>
+                    <input type="text" value="<?= $post->title; ?>"
+                        class="form-control" id="title" name="title" required="required" />
                 </div>
                 <div class="form-group col-md-12">
                     <label class="control-label" for="detail">Résumé <span class="text-danger">*</span></label>
-                    <input type="text"
-                        value="<?= $post->detail; ?>"
-                        class="form-control" id="detail" name="detail" required="required"/>
+                    <input type="text" value="<?= $post->detail; ?>"
+                        class="form-control" id="detail" name="detail" required="required" />
                 </div>
                 <div class="form-group col-md-12">
                     <label for="postContent">Contenu<span class="text-danger">*</span></label>
                     <textarea class="form-control" name="postContent" id="postContent" rows="10"
-                        placeholder="Vous pouvez écrire ici..." required="required"><?= $post->postContent; ?></textarea>
+                        placeholder="Vous pouvez écrire ici..."
+                        required="required"><?= $post->postContent; ?></textarea>
                 </div>
 
             </div>
-            <a href="index.php?p=editpost&id=<?=$post->posted; ?>" class="btn btn-primary">Annuler</a>
-            <input type="submit" class="btn btn-primary" name="edit" value="Enregistrer"  />
+            <a href="index.php?p=editpost&id=<?=$post->posted; ?>"
+                class="btn btn-primary">Annuler</a>
+            <input type="submit" class="btn btn-primary" name="edit" value="Enregistrer" />
 
         </form>
     </div><!-- /.container -->

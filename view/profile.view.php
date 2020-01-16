@@ -8,8 +8,12 @@
       <div class="col-md-6">
         <div class="card">
           <?php include(VIEW . 'elements/_errors.php'); ?>
-          <h5 class="card-header">Profil de <?= e($user->username) ?>
+          <h5 class="card-header">Profil de <?= e($user->username) ?> 
           </h5>
+          <?php if ($user->manager === 'Admin') : ?>
+          <div><a class="btn btn-secondary" href="index.php?p=admin&id=<?= $user->id; ?>">Administration</a></div><br />'
+          <?php else : ?>
+          <?php endif; ?>
 
           <div class="card-body row">
             <p class="card-text col-md-6"><img
@@ -83,6 +87,7 @@
         </div>
       </div>
     </div>
+
   </div><!-- /.container -->
 </div>
 </div>

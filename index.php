@@ -75,12 +75,18 @@ switch ($p) {
     {
         include(CONTROLLER.'profile.php');
         break;
-    }    
+    }
+    case 'admin':
+        {
+            include(ADMIN.'controller_admin.php');
+            break;
+        }
+          
     case 'editprofil':
     {
          include(CONTROLLER.'edit_user.php');
         break;
-    }    
+    }
     default:
     {
         include(VIEW.'404.php');

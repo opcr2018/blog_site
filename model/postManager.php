@@ -1,12 +1,14 @@
 <?php
+
 //get all posts in db
 if (!function_exists('getListPost')) {
     function getListPost()
     {
         $db = getConnect();
-        $q = $db->prepare("SELECT post.id AS posted, img, title, detail, users.username AS username, DATE_FORMAT(post.update_time, '%d/%m/%Y à %Hh%imin') AS date_fr
+        $q = $db->prepare("SELECT post.id AS posted, img, title, detail, statut, users.username AS username, DATE_FORMAT(post.update_time, '%d/%m/%Y à %Hh%imin') AS date_fr
                            FROM post
                            LEFT OUTER JOIN users ON users.id = post.user_id
+                           WHERE statut = '1'
                            ORDER BY post.id ASC");
         $q->execute();
         $posts = $q->fetchAll(PDO::FETCH_OBJ);
@@ -27,6 +29,21 @@ if (!function_exists('getListComment')) {
         $q->execute();
         $comments = $q->fetchAll(PDO::FETCH_OBJ);
         return $comments;
+    }
+}
+
+//find the author by id
+if (!function_exists('getAuthor')) {
+    function getAuthor()
+    {
+        $db = getConnect();
+        $q = $db->prepare("SELECT user_id FROM post 
+                   WHERE id = :id");
+        $q->execute(
+            ['id' => $_GET['id']]
+        );
+        $author = $q->fetch(PDO::FETCH_OBJ);
+        return $author;
     }
 }
 
@@ -75,7 +92,7 @@ if (!function_exists('updatePost')) {
     {
         $db = getConnect();
         $q = $db->prepare("UPDATE post
-                           SET img = :img, title = :title, postContent = :postContent, detail = :detail,
+                           SET img = :img, title = :title, statut = :statut, postContent = :postContent, detail = :detail,
                            user_id = :user_id, update_time = NOW()
                            WHERE id = :id");
         $q->execute([
@@ -83,8 +100,10 @@ if (!function_exists('updatePost')) {
             'title'         => e($_POST['title']),
             'postContent'   => e($_POST['postContent']),
             'detail'        => e($_POST['detail']),
+            'statut'        => !empty($_POST['statut']) ? '1' : '0',
             'user_id'       => get_session('user_id'),
             'id'            => $_GET['id']
+
          ]);
     }
 }
@@ -110,13 +129,14 @@ if (!function_exists('addComment')) {
     function addComment()
     {
         $db = getConnect();
-        $q = $db->prepare("INSERT INTO comment(author, email, commContent, post_id, created_date )
-                           VALUES(:author, :email, :commContent, :post_id, NOW())");
+        $q = $db->prepare("INSERT INTO comment(author, email, commContent, user_id, post_id, created_date )
+                           VALUES(:author, :email, :commContent, :user_id, :post_id, NOW())");
         $q->execute([
             'author'      => get_session('username'),
             'email'       => get_session('email'),
             'commContent' => e($_POST['commContent']),
             'post_id'     => e($_POST['post_id']),
+            'user_id'     => get_session('user_id')
         ]);
     }
 }
@@ -154,4 +174,3 @@ if (!function_exists('uploadImg')) {
         ]);
     }
 }
-

@@ -1,13 +1,13 @@
 <?php
 
-require(MODEL.'postManager.php' );
+require(MODEL.'postManager.php');
+
+$posts = getListPost();
 
 //display listpost
-if (isset ($posts)) {
+if (!$posts) {
     set_flash("Il n'y a pas d'articles disponibles", "info");
     redirect('home');
-} else {
-    $posts = getListPost();
 }
 
 require(VIEW.'listPost.view.php');

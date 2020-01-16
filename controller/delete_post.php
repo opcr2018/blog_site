@@ -14,4 +14,4 @@ if (!empty($_GET['id'])) {
     }
 }
 
-redirect('profil&id=' . get_session('user_id'));
+redirect_intent_or('profil&id=' . get_session('user_id'));

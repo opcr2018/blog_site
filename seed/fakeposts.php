@@ -16,8 +16,7 @@ for ($i=1; $i <=10; $i++) {
             'postContent'   => $faker->paragraph($nbSentences = 20, $variableNbSentences = true),
             'detail'        => $faker->paragraph($nbSentences = 2, $variableNbSentences = true),            
             'statut'        => 1,
-            'user_id'       => $faker->numberBetween($min = 3, $max = 104),
-
+            'user_id'       => $faker->numberBetween($min = 3, $max = 104)
         ]);
 }
 

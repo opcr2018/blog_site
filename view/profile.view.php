@@ -10,7 +10,7 @@
           <?php include(VIEW . 'elements/_errors.php'); ?>
           <h5 class="card-header">Profil de <?= e($user->username) ?> 
           </h5>
-          <?php if ($user->manager === 'Admin') : ?>
+          <?php if ($user->manager === '1') : ?>
           <div><a class="btn btn-secondary" href="index.php?p=admin&id=<?= $user->id; ?>">Administration</a></div><br />'
           <?php else : ?>
           <?php endif; ?>

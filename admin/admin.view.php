@@ -1,8 +1,8 @@
 <?php $title = 'Administration'; ?>
 
 <?php ob_start(); ?>
+<!-- Post list waiting for validation -->
 <div class="row">
-  <!-- Post list waiting for validation -->
   <h1>Liste des Articles</h1>
   <table class="table table-striped">
     <thead>
@@ -53,14 +53,13 @@
       <?php endforeach; ?>
       <?php else :?>
       <td>
-        il n'y a pas d'articles publiés
+        il n'y a pas d'articles à valider
       </td>
       <?php endif; ?>
     </tbody>
   </table>
 </div>
-
-<!-- Comments list waiting fo validation -->
+<!-- Comments list waiting for validation -->
 <div class="row">
   <h1>Liste des Commentaires</h1>
   <table class="table table-striped">
@@ -95,7 +94,7 @@
                 value="<?= $comment->commented; ?>">
               <label>
                 <input class="btn btn-success btn-sm" type="submit" aria-label="Publier" id="active" name="active"
-                  value="Publier">
+                  value="Valider">
               </label>
             </div>
         </td>
@@ -110,11 +109,61 @@
       </tr>
       <?php endforeach; ?>
       <?php else :?>
-      <td>il n'y a pas d'articles publiés</td>
+      <td>il n'y a pas de commentaires à valider</td>
       <?php endif; ?>
     </tbody>
   </table>
 </div>
+<!-- Users list waitin for validation or admin persmission -->
+<div class="row">
+<h1>Liste des Utilisateurs et des Administrateurs</h1>
+<table class="table table-striped">
+<thead>
+<tr>
+<th scope="col">Peudonyme</th>
+<th scope="col">Email</th>
+<th scope="col">Pays</th>
+<th scope="col">Twitter</th>
+<th scope="col">Github</th>
+<th scope="col">Permission</th>
+<th scope="col">Profil Actif</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<?php if (!empty($users)) :?>
+  <?php foreach($users as $user) : ?>
+  <td>
+  <?= $user->username ?>
+</td>
+<td>
+  <a href="mailto:"><?= $user->email; ?></a> 
+</td>
+<td>
+  <?= $user->country; ?>
+</td>
+<td>
+  <a href="//twitter.com/"></a> <?= $user->twitter; ?>
+</td>
+<td>
+  <a href="//github.com/"></a> <?= $user->github; ?>
+</td>
+<td>
+  <?= $user->manager == '1'
+  ? 'Administrateur'
+  : 'Editeur'; ?>
+</td>
+<td>
+  <?= $user->active; ?>
+</td>
+</tr>
+      <?php endforeach; ?>
+      <?php else :?>
+      <td>il n'y a pas d'utilisateurs enregistrés.</td>
+      <?php endif; ?>
 
+</tbody>
+</table>
+</div>
 <?php $contentPage = ob_get_clean();
 include(VIEW . 'template.php');

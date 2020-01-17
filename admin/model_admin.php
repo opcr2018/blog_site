@@ -32,7 +32,6 @@ if (!function_exists('updateStatut')) {
 }
 
 //delete a post
-
 if (!function_exists('deletePostAdm')) {
     function deletePostAdm()
     {
@@ -44,8 +43,6 @@ if (!function_exists('deletePostAdm')) {
         ]);
     }
 }
-
-
 
 
 //get all comments in db
@@ -79,8 +76,6 @@ if (!function_exists('updateActive')) {
     }
 }
 
-
-
 //delete a comment
 if (!function_exists('deleteCommentAdm')) {
     function deleteCommentAdm()
@@ -91,5 +86,21 @@ if (!function_exists('deleteCommentAdm')) {
         $q->execute([
             'id' => e($_POST['commentid'])
             ]);
+    }
+}
+
+//get a list of users
+if (!function_exists('getListUsers')) {
+    function getListUsers()
+    {
+        $db = getConnect();
+        $q = $db->prepare("SELECT users.id AS userid, username, email, active, manager, city, country, twitter, github, avatar, DATE_FORMAT(create_time, '%d/%m/%Y') AS usersdate 
+                          FROM users
+                          WHERE manager = '1' OR active = '0'
+                          ORDER BY users.id ASC"
+    );
+        $q->execute();
+        $users = $q->fetchAll(PDO::FETCH_OBJ);
+        return $users;
     }
 }

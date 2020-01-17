@@ -3,13 +3,12 @@ filter_guest();
 require(ADMIN.'model_admin.php');
 $posts = getListPostAdm();
 $comments = getCommentAdm();
-
+$users = getListUsers();
 
 //update statut of the post published or draft
 if (isset($_POST['statut'])) {
     //if fields have been fullfilled
-    if (not_empty(['statut'])) {
-        $errors = [];
+    if (not_empty(['statut'])) {        
         $statut = e($_POST['statut']);
         $postid = e($_POST['postid']);
         updateStatut();
@@ -22,8 +21,7 @@ if (isset($_POST['statut'])) {
 
 //delete a post
 if (isset($_POST['deletepost'])) {
-    if (not_empty(['deletepost'])) {
-        $errors = [];
+    if (not_empty(['deletepost'])) {        
         $posted = e($_POST['posted']);  
         
         deletePostAdm();
@@ -39,8 +37,7 @@ if (isset($_POST['deletepost'])) {
 //update statut of the comment published or draft
 if (isset($_POST['active'])) {
     //if fields have been fullfilled
-    if (not_empty(['active'])) {
-        $errors = [];
+    if (not_empty(['active'])) {        
         $activecomment = e($_POST['active']);
         $commentid = e($_POST['commented']);
         updateActive();
@@ -51,10 +48,9 @@ if (isset($_POST['active'])) {
     clear_input_data();
 }
 
-
+//delete a comment
 if (isset($_POST['deletecomm'])) {
-    if (not_empty(['deletecomm'])) {
-        $errors = [];
+    if (not_empty(['deletecomm'])) {       
         $commentid = e($_POST['commented']);
     
             deleteCommentAdm();
@@ -66,6 +62,5 @@ if (isset($_POST['deletecomm'])) {
         set_flash("le commentaire n'a pas été supprimé", "danger");
     }
 }
-
 
 include(ADMIN.'admin.view.php');

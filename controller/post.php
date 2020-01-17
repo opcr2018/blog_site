@@ -37,11 +37,11 @@ if (isset($_POST['comment'])) {
             addComment(); 
 
             set_flash('le message a été envoyé en attente de modération', 'info');
-            redirect_intent_or($url);
+            redirect_intent_or('post&id='.$postid);
 
         } else {
             set_flash('Contenu invalide', 'warning');
-            redirect_intent_or($url);            
+            redirect_intent_or('post&id='.$postid);            
         }
     }
 }

@@ -8,7 +8,7 @@
 <div class="row">
   <?php foreach ($posts as $post): ?>
   <div class="col-sm-4">
-    <div class="card mb-2" id="tiles">
+    <div class="card mb-4" id="tiles">
       <div class="card-body">
         <h4 class="card-title"><?= e($post->title); ?>
         </h4>
@@ -20,7 +20,7 @@
         </p>
         
         <?= $post->img
-        ? '<p><img class="img-subtitle" src="'. $post->img .'"
+        ? '<p><img class="roundoad img-subtitle" src="'. $post->img .'"
             alt="'. $post->title.'" />
         </p>'
         : '<p><img class="img-subtitle" src="uploads/default.jpg"

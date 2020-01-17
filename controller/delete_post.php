@@ -11,7 +11,8 @@ if (!empty($_GET['id'])) {
         deletePost();
         
         set_flash("Votre publication a été supprimée avec succès.", "info");
+        redirect('admin&id='.get_session('user_id'));
     }
 }
 
-redirect_intent_or('profil&id=' . get_session('user_id'));
+

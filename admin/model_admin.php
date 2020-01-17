@@ -31,12 +31,29 @@ if (!function_exists('updateStatut')) {
     }
 }
 
+//delete a post
+
+if (!function_exists('deletePostAdm')) {
+    function deletePostAdm()
+    {
+        $db = getConnect();
+        $q = $db->prepare("DELETE FROM post 
+                           WHERE id = :id");
+        $q->execute([
+            'id' => $_POST['postid']
+        ]);
+    }
+}
+
+
+
+
 //get all comments in db
 if (!function_exists('getCommentAdm')) {
     function getCommentAdm()
     {
         $db = getConnect();
-        $q = $db->prepare("SELECT comment.id AS commentid, author, email, active, commContent, post_id, post.title AS poststitle, DATE_FORMAT(comment.created_date, '%d/%m/%Y à %Hh%imin') AS dated
+        $q = $db->prepare("SELECT comment.id AS commented, author, email, active, commContent, post_id, post.title AS poststitle, DATE_FORMAT(comment.created_date, '%d/%m/%Y à %Hh%imin') AS dated
                            FROM comment
                            LEFT OUTER JOIN post ON post.id = post_id 
                            WHERE active = '0'                           
@@ -59,5 +76,20 @@ if (!function_exists('updateActive')) {
             'active'        => !empty($_POST['active']) ? '1' : '0',
             'id'            => e($_POST['commentid'])
          ]);
+    }
+}
+
+
+
+//delete a comment
+if (!function_exists('deleteCommentAdm')) {
+    function deleteCommentAdm()
+    {
+        $db = getConnect();
+        $q = $db->prepare("DELETE FROM comment 
+                           WHERE id = :id");
+        $q->execute([
+            'id' => $_POST['commentid']
+            ]);
     }
 }

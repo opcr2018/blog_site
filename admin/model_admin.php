@@ -64,7 +64,7 @@ if (!function_exists('getCommentAdm')) {
     }
 }
 
-//update statut
+//activate comment
 if (!function_exists('updateActive')) {
     function updateActive()
     {
@@ -89,7 +89,7 @@ if (!function_exists('deleteCommentAdm')) {
         $q = $db->prepare("DELETE FROM comment 
                            WHERE id = :id");
         $q->execute([
-            'id' => $_POST['commentid']
+            'id' => e($_POST['commentid'])
             ]);
     }
 }

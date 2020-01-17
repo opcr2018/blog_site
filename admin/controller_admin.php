@@ -21,8 +21,8 @@ if (isset($_POST['statut'])) {
 }
 
 //delete a post
-if (isset($_POST['delete'])) {
-    if (not_empty(['delete'])) {
+if (isset($_POST['deletepost'])) {
+    if (not_empty(['deletepost'])) {
         $errors = [];
         $posted = e($_POST['posted']);  
         
@@ -42,7 +42,7 @@ if (isset($_POST['active'])) {
     if (not_empty(['active'])) {
         $errors = [];
         $activecomment = e($_POST['active']);
-        $commentid = e($_POST['commentid']);
+        $commentid = e($_POST['commented']);
         updateActive();
         set_flash("Le commentaire vient d'être validé", "info");
         redirect('admin');
@@ -52,12 +52,12 @@ if (isset($_POST['active'])) {
 }
 
 
-if (isset($_POST['delete'])) {
-    if (not_empty(['delete'])) {
+if (isset($_POST['deletecomm'])) {
+    if (not_empty(['deletecomm'])) {
         $errors = [];
-        $commented = e($_POST['commented']);
-          
-        deleteCommentAdm();
+        $commentid = e($_POST['commented']);
+    
+            deleteCommentAdm();
         
         set_flash("Votre commentaire a été supprimé avec succès.", "info");
         redirect('admin');

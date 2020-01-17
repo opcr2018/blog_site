@@ -23,31 +23,38 @@
           <a href="index.php?p=post&id=<?= $post->posted ?>"
             target="blank"><?= e($post->title); ?></a>
         </td>
-        <td><?= e($post->detail); ?>
-        </td>
-        <td><?= e($post->username); ?>
+        <td>
+          <?= e($post->detail); ?>
         </td>
         <td>
-          <form method="POST" class="well" >
+          <?= e($post->username); ?>
+        </td>
+        <td>
+          <form method="POST" class="well">
             <div>
-              <input type="hidden" name="postid" value="<?= $post->posted; ?>">
+              <input type="hidden" name="postid"
+                value="<?= $post->posted; ?>">
               <label>
                 <input class="btn btn-success btn-sm" type="submit" aria-label="Publier" id="statut" name="statut"
                   value="Publier">
               </label>
             </div>
         </td>
-        <td>Publié le : <?= e($post->date_fr); ?>
+        <td>
+          Publié le : <?= e($post->date_fr); ?>
         </td>
         <td>
-          <input onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');" class="btn btn-primary btn-sm" type="submit" for="delete" arial-label="Supprimer" id="delete" name="delete"
+          <input onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');"
+            class="btn btn-primary btn-sm" type="submit" for="deletepost" arial-label="Supprimer" id="deletepost" name="deletepost"
             value="Supprimer">
         </td>
         </form>
       </tr>
       <?php endforeach; ?>
       <?php else :?>
-      <td>il n'y a pas d'articles publiés</td>
+      <td>
+        il n'y a pas d'articles publiés
+      </td>
       <?php endif; ?>
     </tbody>
   </table>
@@ -84,26 +91,27 @@
         <td>
           <form method="POST" class="well" autocomplete="off">
             <div>
-              <input type="hidden" name="commentid" value="<?= $comment->commented; ?>">
+              <input type="hidden" name="commentid"
+                value="<?= $comment->commented; ?>">
               <label>
                 <input class="btn btn-success btn-sm" type="submit" aria-label="Publier" id="active" name="active"
                   value="Publier">
               </label>
             </div>
-          </form>
-        </td>
-        <td>Publié le : <?= e($comment->dated); ?>
         </td>
         <td>
-          <input class="btn btn-primary btn-sm" type="submit" aria-label="Supprimer" id="delete" name="delete"
-            value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
+          Publié le : <?= e($comment->dated); ?>
         </td>
+        <td>
+          <input onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?');" 
+          class="btn btn-primary btn-sm" type="submit" for="deletecomm" aria-label="Supprimer" id="deletecomm" name="deletecomm" value="Supprimer">
+        </td>
+        </form>
       </tr>
       <?php endforeach; ?>
       <?php else :?>
       <td>il n'y a pas d'articles publiés</td>
       <?php endif; ?>
-
     </tbody>
   </table>
 </div>

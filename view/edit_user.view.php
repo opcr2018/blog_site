@@ -7,6 +7,7 @@
         <div class="row">
             <div class="col">
                 <div class="card" id="edit">
+                <?php !empty($_GET['id']) && $_GET['id'] === get_session('user_id') ?: redirect('index.php'); ?>
                     <h5 class="card-header">Compléter mon profil</h5>
                     <div class="card-body">
                         <?php include(VIEW . 'elements/_errors.php'); ?>

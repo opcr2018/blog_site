@@ -16,7 +16,7 @@
           Publié le : <?= e($post->date_fr); ?>
         </p>
         <p>
-          Par : <?= e($post->username); ?>
+          Par : <a href="index.php?p=profil&id=<?= $post->user_id; ?>"><?= $post->username ?></a>
         </p>
         
         <?= $post->img

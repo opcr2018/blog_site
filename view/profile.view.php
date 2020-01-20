@@ -7,14 +7,15 @@
     <div class="row">
       <div class="col-md-6">
         <div class="card">
-          <?php include(VIEW . 'elements/_errors.php'); ?>
-          <h5 class="card-header">Profil de <?= e($user->username) ?> 
+          <?php include(VIEW . 'elements/_errors.php'); ?><?php if ($user->manager === '1' && !empty($_GET['id']) && $_GET['id'] === get_session('user_id')) : ?>
+          <h5 class="card-header">Profil de <?= e($user->username) ?>&nbsp;
+            <a class="btn btn-secondary btn-sm"
+              href="index.php?p=admin&id=<?= $user->id; ?>">
+              Administration</a>
           </h5>
-          <?php if ($user->manager === '1') : ?>
-          <div><a class="btn btn-secondary" href="index.php?p=admin&id=<?= $user->id; ?>">Administration</a></div><br />'
+          
           <?php else : ?>
           <?php endif; ?>
-
           <div class="card-body row">
             <p class="card-text col-md-6"><img
                 src="<?= $user->avatar ? $user->avatar : get_avatar_url(get_session('email'), 50) ?>"
@@ -56,29 +57,30 @@
             </div>
           </div>
         </div>
-
-        <div class="card-body">
-        <div><a class="btn btn-secondary" href="index.php?p=addpost">Ajouter un article</a></div><br />
-        </div>
       </div>
       <!--List posts-->
       <div class="col-md-6">
         <div class="card">
-          <h5 class="card-header">Liste des articles de <?= e($user->username) ?>
+          <h5 class="card-header">
+            Liste des articles de <?= e($user->username) ?>
           </h5>
-          
           <div class="card-body">
             <?php if (!empty($posts)) :?>
             <?php foreach ($posts as $post) : ?>
             <h4 class="card-title">
-            <a href="index.php?p=post&id=<?= $post->posted ?>"><?= e($post->title); ?></a>    
+              <a href="index.php?p=post&id=<?= $post->posted ?>"><?= e($post->title); ?></a>
             </h4>
             <p><?= e($post->detail); ?>
             </p>
-            <p>Publié le : <?= e($post->date_fr); ?> <a
-                class="btn btn-secondary" href="index.php?p=editpost&id=<?=$post->posted; ?>">Modifier</a>
+            <p>Publié le : <?= e($post->date_fr); ?>
+              <?php if (!empty($_GET['id']) && $post->userid === get_session('user_id')) :?>&nbsp;
+              <a class="btn btn-info btn-sm"
+                href="index.php?p=editpost&id=<?=$post->posted; ?>">Modifier</a>&nbsp;
               <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');"
-              class="btn btn-secondary" href="index.php?p=deletepost&id=<?= $post->posted; ?>"><i class="fa fa-trash"></i> Supprimer</a><br /></p>
+                class="btn btn-primary btn-sm"
+                href="index.php?p=deletepost&id=<?= $post->posted; ?>"><i
+                  class="fa fa-trash"></i> Supprimer</a><br /></p>
+            <?php endif; ?>
             <?php endforeach; ?>
             <?php else :?>
             <p>Vous n'avez encore rien publié...</p>

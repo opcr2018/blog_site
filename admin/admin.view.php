@@ -122,7 +122,6 @@
 <tr>
 <th scope="col">Peudonyme</th>
 <th scope="col">Email</th>
-<th scope="col">Pays</th>
 <th scope="col">Twitter</th>
 <th scope="col">Github</th>
 <th scope="col">Permission</th>
@@ -134,19 +133,16 @@
 <?php if (!empty($users)) :?>
   <?php foreach($users as $user) : ?>
   <td>
-  <?= $user->username ?>
+  <a href="index.php?p=profil&id=<?= $user->userid; ?>"><?= $user->username ?></a>
 </td>
 <td>
   <a href="mailto:"><?= $user->email; ?></a> 
 </td>
 <td>
-  <?= $user->country; ?>
+  <a href="//twitter.com/"><?= $user->twitter; ?></a> 
 </td>
 <td>
-  <a href="//twitter.com/"></a> <?= $user->twitter; ?>
-</td>
-<td>
-  <a href="//github.com/"></a> <?= $user->github; ?>
+  <a href="//github.com/"><?= $user->github; ?></a>
 </td>
 <td>
   <?= $user->manager == '1'

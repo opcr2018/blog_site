@@ -16,6 +16,22 @@ if (!function_exists('getListPost')) {
     }
 }
 
+// get total posts
+if (!function_exists('getTotalPosts')) {
+    function getTotalPosts()
+    {
+        $db = getConnect();
+        $q = $db->prepare("SELECT post.id
+                           FROM post
+                           LEFT OUTER JOIN users ON users.id = post.user_id
+                           WHERE statut = '1'
+                           ORDER BY post.id ASC");
+        $q->execute();
+        $posts = $q->rowCount();
+        return $posts;
+    }
+}
+
 //get all comments
 if (!function_exists('getListComment')) {
     function getListComment()

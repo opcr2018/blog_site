@@ -5,6 +5,7 @@ $posts = getListPostAdm();
 $comments = getCommentAdm();
 $users = getListUsers();
 
+//Posts part
 //update statut of the post published or draft
 if (isset($_POST['statut'])) {
     //if fields have been fullfilled
@@ -34,6 +35,7 @@ if (isset($_POST['deletepost'])) {
     }
 }
 
+//Comments Part
 //update statut of the comment published or draft
 if (isset($_POST['active'])) {
     //if fields have been fullfilled
@@ -62,5 +64,10 @@ if (isset($_POST['deletecomm'])) {
         set_flash("le commentaire n'a pas été supprimé", "danger");
     }
 }
+
+//Management Part
+//Grant permission
+
+
 
 include(ADMIN.'admin.view.php');

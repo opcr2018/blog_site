@@ -7,20 +7,20 @@
     <div class="row">
       <div class="col-md-6">
         <div class="card">
-          <?php include(VIEW . 'elements/_errors.php'); ?><?php if ($user->manager === '1' && !empty($_GET['id']) && $_GET['id'] === get_session('user_id')) : ?>
-          <h5 class="card-header">Profil de <?= e($user->username) ?>&nbsp;
-            <a class="btn btn-secondary btn-sm"
+        
+          <?php include(VIEW . 'elements/_errors.php'); ?>
+          <?php if ($user->manager === '1' && !empty($_GET['id']) && $_GET['id'] === get_session('user_id')) : ?>
+            <h5 class="card-header">Profil de <?= e($user->username) ?>&nbsp;&nbsp;     
+            <a class="btn btn-danger btn-sm"
               href="index.php?p=admin&id=<?= $user->id; ?>">
               Administration</a>
-          </h5>
-          
           <?php else : ?>
-          <?php endif; ?>
+          <?php endif; ?></h5> 
           <div class="card-body row">
             <p class="card-text col-md-6"><img
-                src="<?= $user->avatar ? $user->avatar : get_avatar_url(get_session('email'), 50) ?>"
-                alt="image de profil de <?= get_session('username') ?>"
-                class="avatar-md"><br /></p>
+                src="<?= $user->avatar ? $user->avatar : get_avatar_url($user->email, 50)?>"
+                alt="image de profil de <?= $user->username ?>"
+                class="img-thumbnail avatar-md"><br /></p>
             </p>
             <p class="card-text col-md-6">
               <?= e($user->username) ?><br />

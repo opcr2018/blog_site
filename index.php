@@ -12,9 +12,6 @@ if (!empty($_GET['p']) && $_GET['p']) {
     $p = $_GET['p'];
 }
 
-
-
-
 switch ($p) {
     case 'home':
     {

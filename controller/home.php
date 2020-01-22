@@ -5,8 +5,7 @@ require(MODEL.'postManager.php');
 if (isset($comments)) {
     echo '<h4>Laissez un commentaire un il s\'affichera ici !</h4>';
     redirect('home');
-} else {
-    $posts = getListPost(); 
+} else {    
     $comments = getListComment();
 }
 

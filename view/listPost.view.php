@@ -5,6 +5,7 @@
 <div class="jumbotron text-center">
   <h1>Articles du Blog</h1>
 </div>
+
 <div class="row">
   <?php foreach ($posts as $post): ?>
   <div class="col-sm-4">
@@ -16,9 +17,10 @@
           Publié le : <?= e($post->date_fr); ?>
         </p>
         <p>
-          Par : <a href="index.php?p=profil&id=<?= $post->user_id; ?>"><?= $post->username ?></a>
+          Par : <a
+            href="index.php?p=profil&id=<?= $post->user_id; ?>"><?= $post->username ?></a>
         </p>
-        
+
         <?= $post->img
         ? '<p><img class="roundoad img-subtitle" src="'. $post->img .'"
             alt="'. $post->title.'" />
@@ -37,6 +39,8 @@
     </div>
   </div>
   <?php endforeach; ?>
+  <div id="pagination"><?= $pagination ?>
+        </div>
 </div>
 
 <?php $contentPage = ob_get_clean();

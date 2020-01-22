@@ -1,20 +1,7 @@
 <?php
-
-//get all posts in db
-if (!function_exists('getListPost')) {
-    function getListPost()
-    {
-        $db = getConnect();
-        $q = $db->prepare("SELECT post.id AS posted, img, title, detail, statut, user_id, users.username AS username, DATE_FORMAT(post.update_time, '%d/%m/%Y à %Hh%imin') AS date_fr
-                           FROM post
-                           LEFT OUTER JOIN users ON users.id = post.user_id
-                           WHERE statut = '1'
-                           ORDER BY post.id ASC");
-        $q->execute();
-        $posts = $q->fetchAll(PDO::FETCH_OBJ);
-        return $posts;
-    }
-}
+//==========================================
+// Pagination
+//==========================================
 
 // get total posts
 if (!function_exists('getTotalPosts')) {
@@ -23,11 +10,29 @@ if (!function_exists('getTotalPosts')) {
         $db = getConnect();
         $q = $db->query("SELECT post.id
                            FROM post
-                           LEFT OUTER JOIN users ON users.id = post.user_id
-                           WHERE statut = '1'
-                           ORDER BY post.id ASC");
+                           WHERE statut='1'");
         $countposts = $q->rowCount();
+        $q->closeCursor();
         return $countposts;
+    }
+}
+
+//get all posts in db
+if (!function_exists('getListPost')) {
+    function getListPost($page_num, $limit)
+    {
+        $db = getConnect();
+        $q = $db->prepare("SELECT post.id AS posted, img, title, detail, statut, user_id, users.username AS username, DATE_FORMAT(post.update_time, '%d/%m/%Y à %Hh%imin') AS date_fr
+        FROM post
+        LEFT OUTER JOIN users ON users.id = post.user_id 
+        WHERE statut = '1' 
+        ORDER BY post.id 
+        $limit");
+        $q->execute([$page_num]);
+        $posts = $q->fetchAll(PDO::FETCH_OBJ); 
+        
+        return $posts;
+       
     }
 }
 

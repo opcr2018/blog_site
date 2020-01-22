@@ -8,9 +8,9 @@ if ($countposts >= 1) {
     $beforeafter = 2;
     $last_page = ceil($countposts / $nbre_posts_par_page);
 
-    if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0) {
-        $page_num = $_GET['id'];        
-       
+    if (!empty($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0) {
+        $_GET['id'] = intval($_GET['id']);
+        $page_num = $_GET['id'];
     } else {
         $page_num = 1;
     }
@@ -22,6 +22,8 @@ if ($countposts >= 1) {
     }
 
     $limit = 'LIMIT ' . ($page_num - 1) * $nbre_posts_par_page . ',' . $nbre_posts_par_page;
+
+    $posts = getListPost($page_num, $limit);
 
     $pagination = '<nav><ul class="pagination justify-content-center">';
     if ($last_page != 1) {
@@ -48,8 +50,6 @@ if ($countposts >= 1) {
         }
     }
     $pagination .='</ul></nav>';
-
-     $posts = getListPost($_GET['id'],$limit);
 } else {
     set_flash('Aucun articles pour le moment', 'info');
     redirect('home');

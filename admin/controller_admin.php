@@ -66,8 +66,19 @@ if (isset($_POST['deletecomm'])) {
 }
 
 //Management Part
-//Grant permission
-
+//get permission's profile
+if (isset($_POST['manager'])) {
+    //if fields have been fullfilled
+    if (not_empty(['manager'])) {        
+        $manager = e($_POST['manager']);
+        $userid = e($_POST['userid']);
+        updategrant();
+        set_flash("Le statut a été modifié", "info");
+        redirect('admin');
+    }
+} else {
+    clear_input_data();
+}
 
 
 include(ADMIN.'admin.view.php');

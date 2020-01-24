@@ -96,7 +96,7 @@ if (!function_exists('getListUsers')) {
         $db = getConnect();
         $q = $db->prepare("SELECT users.id AS userid, username, email, active, manager, city, country, twitter, github, avatar, DATE_FORMAT(create_time, '%d/%m/%Y') AS usersdate 
                           FROM users
-                          WHERE manager = '1' OR active = '0'
+                          WHERE active = '1' OR active = '0'
                           ORDER BY users.id ASC"
     );
         $q->execute();
@@ -104,3 +104,19 @@ if (!function_exists('getListUsers')) {
         return $users;
     }
 }
+
+//update the grant
+if (!function_exists('updateGrant')) {
+    function updateGrant()
+    {
+        $db = getConnect();
+        $q = $db->prepare("UPDATE users
+                           SET manager = :manager
+                           WHERE id = :id");
+        $q->execute([
+            'manager'        => e($_POST['manager']),
+            'id'            => e($_POST['userid'])
+         ]);
+    }
+}
+

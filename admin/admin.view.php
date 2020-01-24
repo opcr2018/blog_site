@@ -45,8 +45,8 @@
         </td>
         <td>
           <input onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');"
-            class="btn btn-primary btn-sm" type="submit" for="deletepost" arial-label="Supprimer" id="deletepost" name="deletepost"
-            value="Supprimer">
+            class="btn btn-primary btn-sm" type="submit" for="deletepost" arial-label="Supprimer" id="deletepost"
+            name="deletepost" value="Supprimer">
         </td>
         </form>
       </tr>
@@ -102,8 +102,9 @@
           Publié le : <?= e($comment->dated); ?>
         </td>
         <td>
-          <input onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?');" 
-          class="btn btn-primary btn-sm" type="submit" for="deletecomm" aria-label="Supprimer" id="deletecomm" name="deletecomm" value="Supprimer">
+          <input onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?');"
+            class="btn btn-primary btn-sm" type="submit" for="deletecomm" aria-label="Supprimer" id="deletecomm"
+            name="deletecomm" value="Supprimer">
         </td>
         </form>
       </tr>
@@ -116,50 +117,63 @@
 </div>
 <!-- Users list waitin for validation or admin persmission -->
 <div class="row">
-<h1>Liste des Utilisateurs et des Administrateurs</h1>
-<table class="table table-striped">
-<thead>
-<tr>
-<th scope="col">Peudonyme</th>
-<th scope="col">Email</th>
-<th scope="col">Twitter</th>
-<th scope="col">Github</th>
-<th scope="col">Permission</th>
-<th scope="col">Profil Actif</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<?php if (!empty($users)) :?>
-  <?php foreach($users as $user) : ?>
-  <td>
-  <a href="index.php?p=profil&id=<?= $user->userid; ?>"><?= $user->username ?></a>
-</td>
-<td>
-  <a href="mailto:"><?= $user->email; ?></a> 
-</td>
-<td>
-  <a href="//twitter.com/"><?= $user->twitter; ?></a> 
-</td>
-<td>
-  <a href="//github.com/"><?= $user->github; ?></a>
-</td>
-<td>
-  <?= $user->manager == '1'
+  <h1>Liste des Utilisateurs et des Administrateurs</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Peudonyme</th>
+        <th scope="col">Email</th>
+        <th scope="col">Twitter</th>
+        <th scope="col">Github</th>
+        <th scope="col">Permission</th>
+        <th scope="col">Profil Actif</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <?php if (!empty($users)) :?>
+        <?php foreach ($users as $user) : ?>
+        <td>
+          <a href="index.php?p=profil&id=<?= $user->userid; ?>"target='_blank'><?= $user->username ?></a>
+        </td>
+        <td>
+          <a href="mailto:"><?= $user->email; ?></a>
+        </td>
+        <td>
+          <a href="//twitter.com/<?= $user->twitter; ?>" target='_blank'><?= $user->twitter; ?></a>
+        </td>
+        <td>
+          <a href="//github.com/<?= $user->github; ?>" target='_blank'><?= $user->github; ?></a>
+        </td>
+        <td>
+          <div class="form-group col-md-8">
+            <label for="manager">Statut actuel : <?= $user->manager == '1'
   ? 'Administrateur'
-  : 'Editeur'; ?>
-</td>
-<td>
-  <?= $user->active; ?>
-</td>
-</tr>
+  : 'Editeur'; ?></label>
+            <select name="manager" id="manager" class="form-control">
+
+              <option value="1" <?= $user->manager = "1"
+                                                        ? "selected"
+                                                        : ''
+                                                    ?>>Administrateur</option>
+              <option value="0" <?= $user->manager = "0"
+                                                        ? "selected"
+                                                        : ''
+                                                    ?>>Editeur</option>
+            </select>
+          </div>
+        </td>
+        <td>
+          <?= $user->active; ?>
+        </td>
+      </tr>
       <?php endforeach; ?>
       <?php else :?>
       <td>il n'y a pas d'utilisateurs enregistrés.</td>
       <?php endif; ?>
 
-</tbody>
-</table>
+    </tbody>
+  </table>
 </div>
 <?php $contentPage = ob_get_clean();
 include(VIEW . 'template.php');

@@ -1,4 +1,7 @@
 <?php
+// ==========================================================
+// Posts Part
+// ==========================================================
 
 //get all posts in db
 if (!function_exists('getListPostAdm')) {
@@ -44,16 +47,19 @@ if (!function_exists('deletePostAdm')) {
     }
 }
 
+// ==========================================================
+// Comments Part
+// ==========================================================
 
 //get all comments in db
 if (!function_exists('getCommentAdm')) {
     function getCommentAdm()
     {
         $db = getConnect();
-        $q = $db->prepare("SELECT comment.id AS commented, author, email, active, commContent, post_id, post.title AS poststitle, DATE_FORMAT(comment.created_date, '%d/%m/%Y à %Hh%imin') AS dated
+        $q = $db->prepare("SELECT comment.id AS commented, author, email, valide, commContent, post_id, post.title AS poststitle, DATE_FORMAT(comment.created_date, '%d/%m/%Y à %Hh%imin') AS dated
                            FROM comment
                            LEFT OUTER JOIN post ON post.id = post_id 
-                           WHERE active = '0'                           
+                           WHERE valide = '0'                           
                            ORDER BY comment.created_date DESC");
         $q->execute();
         $data = $q->fetchAll(PDO::FETCH_OBJ);
@@ -67,10 +73,10 @@ if (!function_exists('updateActive')) {
     {
         $db = getConnect();
         $q = $db->prepare("UPDATE comment
-                           SET active = :active
+                           SET valide = :valide
                            WHERE id = :id");
         $q->execute([
-            'active'        => !empty($_POST['active']) ? '1' : '0',
+            'valide'        => !empty($_POST['valide']) ? '1' : '0',
             'id'            => e($_POST['commentid'])
          ]);
     }
@@ -89,6 +95,10 @@ if (!function_exists('deleteCommentAdm')) {
     }
 }
 
+// ==========================================================
+// Users Part
+// ==========================================================
+
 //get a list of users
 if (!function_exists('getListUsers')) {
     function getListUsers()
@@ -106,17 +116,17 @@ if (!function_exists('getListUsers')) {
 
 //update the grant
 if (!function_exists('updateGrant')) {
-    function updateGrant()
+    function updateGrant($manager,$active, $id)
     {
         $db = getConnect();
         $q = $db->prepare("UPDATE users
                            SET manager = :manager, active = :active
                            WHERE id = :id");
         $q->execute([
-            //'manager'       => $_POST['manager'],
-            'active'        => $_POST['activate'],
-            'id'            => $_POST['userid']
-         ]);
+            'manager'=> $manager, 
+            'active'=> $active,
+            'id'=> $id
+            ]);
     }
 }
 

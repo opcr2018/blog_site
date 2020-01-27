@@ -44,7 +44,7 @@ if (!function_exists('getListComment')) {
         $q = $db->prepare("SELECT  comment.id, author, email, commContent, post_id, DATE_FORMAT(comment.created_date, '%d/%m/%Y à %Hh%imin') AS dated, post.title AS postitle
                            FROM comment
                            LEFT OUTER JOIN post ON post_id = post.id
-                           WHERE active = 'Y'                           
+                           WHERE valide = '1'                           
                            ORDER BY comment.created_date DESC LIMIT 5");
         $q->execute();
         $comments = $q->fetchAll(PDO::FETCH_OBJ);
@@ -168,7 +168,7 @@ if (!function_exists('getComment')) {
         $db = getConnect();
         $q = $db->prepare("SELECT id, author, email, commContent, post_id, DATE_FORMAT(created_date, '%d/%m/%Y à %Hh%imin') AS dated
                            FROM comment
-                           WHERE (post_id = :post_id && active = 'Y')                           
+                           WHERE (post_id = :post_id && valide = '1')                           
                            ORDER BY created_date DESC");
         $q->execute(
             [

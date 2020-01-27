@@ -69,8 +69,8 @@
         <th scope="col">Commentaires</th>
         <th scope="col">Auteur</th>
         <th scope="col">Statut</th>
-        <th scope="col">Date d'envoi</th>
         <th scope="col">Action</th>
+        <th scope="col">Mis à jour</th>
       </tr>
     </thead>
     <tbody>
@@ -88,18 +88,13 @@
           <?= e($comment->author); ?>
         </td>
         <td>
-          <form method="POST" class="well" autocomplete="off">
-            <div>
-              <input type="hidden" name="commentid"
-                value="<?= $comment->commented; ?>">
-              <label>
-                <input class="btn btn-success btn-sm" type="submit" aria-label="Publier" id="active" name="active"
-                  value="Valider">
-              </label>
-            </div>
-        </td>
-        <td>
-          Publié le : <?= e($comment->dated); ?>
+          <form method="POST" class="well">
+            <input type="hidden" name="commentid"
+              value="<?= $comment->commented; ?>">
+            <label>
+              <input class="btn btn-success btn-sm" type="submit" aria-label="Valider" id="valide" name="valide"
+                value="Valider">
+            </label>
         </td>
         <td>
           <input onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?');"
@@ -107,6 +102,9 @@
             name="deletecomm" value="Supprimer">
         </td>
         </form>
+        <td>
+          Publié le : <?= e($comment->dated); ?>
+        </td>
       </tr>
       <?php endforeach; ?>
       <?php else :?>
@@ -150,37 +148,52 @@
             target='_blank'><?= $user->github; ?></a>
         </td>
         <td>
-          <div class="form-group">
-            <label for="manager">Statut actuel :
+          <form method="POST" class="well">
+            <input type="hidden" name="userid"
+              value="<?= $user->usered; ?>">
+            <div class="form-group">
+              Statut actuel :
               <strong>
                 <?= $user->manager == 'A'
                                   ? 'Administrateur'
                                   : 'Editeur'; ?>
               </strong>
-            </label>
-            <form method="POST" class="well">
-              <input type="hidden" name="userid"
-                value="<?= $user->usered; ?>">
-          </div>
-          </form>
+              <select class="form-control custom-select custom-select-sm" name="manager" id="manager">
+                <option value="A" <?= $user->manager == "A"
+                                                  ? "selected"
+                                                  :'' ;
+                                                  ?>>Administrateur</option>
+                <option value="E" <?= $user->manager == "E"
+                                                  ? "selected"
+                                                  :'' ;
+                                                  ?>>Editeur</option>
+              </select>
+            </div>
+
         </td>
-        </form>
         <td>
           <div class="form-group">
             Etat du Profil : <strong><?= $user->active == 'Y'
                                                         ? 'Actif'
                                                         : 'Inactif'; ?>
             </strong>
-            <form method="POST" class="well">
-              <input type="hidden" name="userid"
-                value="<?= $user->usered; ?>">
-            </form>
+
+            <select class="form-control custom-select custom-select-sm" name="active" id="active">
+              <option value="Y" <?= $user->active == "Y"
+                                                  ? "selected"
+                                                  :'' ;
+                                                  ?>>Activer</option>
+              <option value="N" <?= $user->active == "N"
+                                                  ? "selected"
+                                                  :'' ;
+                                                  ?>>Désactiver</option>
+            </select>
         </td>
-        <td>
-          <label>
-            <input class="btn btn-info btn-sm" type="submit" aria-label="Mettre à jour" id="updateInfo"
-              name="updateInfo" value="Enregistrer">
-          </label>
+        <td> <label for="updateInfo"></label>
+          <input class="btn btn-info btn-sm" type="submit" aria-label="Mettre à jour" id="updateInfo" name="updateInfo"
+            value="Enregistrer">
+          </form>
+
 </div>
 </td>
 </tr>

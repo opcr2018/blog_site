@@ -25,7 +25,7 @@ if (isset($_POST['statut'])) {
 
 //delete a post
 if (isset($_POST['deletepost'])) {
-    if (not_empty(['posted'])) {
+    if (not_empty(['deletepost'])) {
         $errors=[];
         $posted = e($_POST['posted']);
         
@@ -43,11 +43,11 @@ if (isset($_POST['deletepost'])) {
 //Comments Part
 // ==========================================================
 //update statut of the comment published or draft
-if (isset($_POST['active'])) {
+if (isset($_POST['valide'])) {
     //if fields have been fullfilled
-    if (not_empty(['active', 'commented'])) {
+    if (not_empty(['valide'])) {
         $errors=[];
-        $activecomment = e($_POST['active']);
+        $valide = e($_POST['valide']);
         $commentid = e($_POST['commented']);
         updateActive();
         set_flash("Le commentaire vient d'être validé", "info");
@@ -59,7 +59,7 @@ if (isset($_POST['active'])) {
 
 //delete a comment
 if (isset($_POST['deletecomm'])) {
-    if (not_empty(['commented'])) {
+    if (not_empty(['deletecomm'])) {
         $errors=[];
         $commentid = e($_POST['commented']);
     
@@ -82,15 +82,17 @@ if (isset($_POST['deletecomm'])) {
 //update information provided by the form
 if (isset($_POST['updateInfo'])) {
     //if fields have been fullfilled
-    if (not_empty(['activate', 'userid'])) {
+    if (not_empty(['manager', 'userid'])) {
         $errors=[];      
-        $active  = e($_POST['activate']);
+        
+        $manager = e($_POST['manager']);
+        $active  = e($_POST['active']);
         $id      = e($_POST['userid']);
 
-        updateGrant();
+        updateGrant($manager, $active, $id);
 
-        //set_flash("Les informations de l'utilisateur ont été mis à jour", "info");
-        //redirect('admin');
+        set_flash("Les informations de l'utilisateur ont été mis à jour", "info");
+        redirect('admin');
     }
 } else {
     clear_input_data();

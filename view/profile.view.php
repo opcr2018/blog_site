@@ -9,7 +9,7 @@
         <div class="card">
         
           <?php include(VIEW . 'elements/_errors.php'); ?>
-          <?php if ($user->manager === '1' && !empty($_GET['id']) && $_GET['id'] === get_session('user_id')) : ?>
+          <?php if ($user->manager === 'A' && !empty($_GET['id']) && $_GET['id'] === get_session('user_id')) : ?>
             <h5 class="card-header">Profil de <?= e($user->username) ?>&nbsp;&nbsp;     
             <a class="btn btn-danger btn-sm"
               href="index.php?p=admin&id=<?= $user->id; ?>">

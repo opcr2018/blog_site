@@ -16,7 +16,7 @@
      function activation()
      {
          $db = getConnect();
-         $q = $db->prepare("UPDATE users SET active = '1' WHERE username = ?");
+         $q = $db->prepare("UPDATE users SET active = 'Y' WHERE username = ?");
          $q->execute(['username']);
      }
  }

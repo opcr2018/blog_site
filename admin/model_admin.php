@@ -94,10 +94,9 @@ if (!function_exists('getListUsers')) {
     function getListUsers()
     {
         $db = getConnect();
-        $q = $db->prepare("SELECT users.id AS userid, username, email, active, manager, city, country, twitter, github, avatar, DATE_FORMAT(create_time, '%d/%m/%Y') AS usersdate 
+        $q = $db->prepare("SELECT users.id AS usered, username, email, active, manager, city, country, twitter, github, avatar, DATE_FORMAT(create_time, '%d/%m/%Y') AS usersdate 
                           FROM users
-                          WHERE active = '1' OR active = '0'
-                          ORDER BY users.id ASC"
+                          ORDER BY active AND username DESC"
     );
         $q->execute();
         $users = $q->fetchAll(PDO::FETCH_OBJ);
@@ -111,11 +110,12 @@ if (!function_exists('updateGrant')) {
     {
         $db = getConnect();
         $q = $db->prepare("UPDATE users
-                           SET manager = :manager
+                           SET manager = :manager, active = :active
                            WHERE id = :id");
         $q->execute([
-            'manager'        => e($_POST['manager']),
-            'id'            => e($_POST['userid'])
+            //'manager'       => $_POST['manager'],
+            'active'        => $_POST['activate'],
+            'id'            => $_POST['userid']
          ]);
     }
 }

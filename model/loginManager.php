@@ -7,7 +7,7 @@
             $db = getConnect();
             $q = $db->prepare("SELECT id, username, email, manager, password AS pass FROM users 
                    WHERE (username = :identifiant OR email = :identifiant)
-                   AND active = '1'");
+                   AND active = 'Y'");
             $q->execute([
                 'identifiant' => e($_POST['identifiant'])                
 ]);

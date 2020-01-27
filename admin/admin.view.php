@@ -127,6 +127,7 @@
         <th scope="col">Github</th>
         <th scope="col">Permission</th>
         <th scope="col">Profil Actif</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -134,46 +135,62 @@
         <?php if (!empty($users)) :?>
         <?php foreach ($users as $user) : ?>
         <td>
-          <a href="index.php?p=profil&id=<?= $user->userid; ?>"target='_blank'><?= $user->username ?></a>
+          <a href="index.php?p=profil&id=<?= $user->usered; ?>"
+            target='_blank'><?= $user->username ?></a>
         </td>
         <td>
           <a href="mailto:"><?= $user->email; ?></a>
         </td>
         <td>
-          <a href="//twitter.com/<?= $user->twitter; ?>" target='_blank'><?= $user->twitter; ?></a>
+          <a href="//twitter.com/<?= $user->twitter; ?>"
+            target='_blank'><?= $user->twitter; ?></a>
         </td>
         <td>
-          <a href="//github.com/<?= $user->github; ?>" target='_blank'><?= $user->github; ?></a>
+          <a href="//github.com/<?= $user->github; ?>"
+            target='_blank'><?= $user->github; ?></a>
         </td>
         <td>
-          <div class="form-group col-md-8">
-            <label for="manager">Statut actuel : <?= $user->manager == '1'
-  ? 'Administrateur'
-  : 'Editeur'; ?></label>
-            <select name="manager" id="manager" class="form-control">
-
-              <option value="1" <?= $user->manager = "1"
-                                                        ? "selected"
-                                                        : ''
-                                                    ?>>Administrateur</option>
-              <option value="0" <?= $user->manager = "0"
-                                                        ? "selected"
-                                                        : ''
-                                                    ?>>Editeur</option>
-            </select>
+          <div class="form-group">
+            <label for="manager">Statut actuel :
+              <strong>
+                <?= $user->manager == 'A'
+                                  ? 'Administrateur'
+                                  : 'Editeur'; ?>
+              </strong>
+            </label>
+            <form method="POST" class="well">
+              <input type="hidden" name="userid"
+                value="<?= $user->usered; ?>">
           </div>
+          </form>
+        </td>
+        </form>
+        <td>
+          <div class="form-group">
+            Etat du Profil : <strong><?= $user->active == 'Y'
+                                                        ? 'Actif'
+                                                        : 'Inactif'; ?>
+            </strong>
+            <form method="POST" class="well">
+              <input type="hidden" name="userid"
+                value="<?= $user->usered; ?>">
+            </form>
         </td>
         <td>
-          <?= $user->active; ?>
-        </td>
-      </tr>
-      <?php endforeach; ?>
-      <?php else :?>
-      <td>il n'y a pas d'utilisateurs enregistrés.</td>
-      <?php endif; ?>
+          <label>
+            <input class="btn btn-info btn-sm" type="submit" aria-label="Mettre à jour" id="updateInfo"
+              name="updateInfo" value="Enregistrer">
+          </label>
+</div>
+</td>
+</tr>
+<?php endforeach; ?>
+<?php else :?>
+<td>il n'y a pas d'utilisateurs enregistrés.</td>
+<?php endif; ?>
 
-    </tbody>
-  </table>
+</tbody>
+</table>
 </div>
 <?php $contentPage = ob_get_clean();
 include(VIEW . 'template.php');

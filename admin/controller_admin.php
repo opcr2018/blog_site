@@ -3,7 +3,6 @@ filter_guest();
 require(ADMIN.'model_admin.php');
 $posts = getListPostAdm();
 $comments = getCommentAdm();
-$users = getListUsers();
 
 // ==========================================================
 //Posts part
@@ -76,14 +75,66 @@ if (isset($_POST['deletecomm'])) {
 // Management Part
 // ==========================================================
 
+//get permission's profile with pagination
+$countusers = getTotalUsers();
 
-//get permission's profile
+if ($countusers >= 1) {
+    $users_par_page = 6;
+    $beforeafter = 2;
+    $total_page = ceil($countusers / $users_par_page);
 
+    if (!empty($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0) {
+        $_GET['id'] = intval($_GET['id']);
+        $page_num = $_GET['id'];
+      
+    } else {
+        $page_num = 1;
+    }
+
+    if ($page_num < 1) {
+        $page_num = 1;
+    } elseif ($page_num > $total_page) {
+        $page_num = 1;
+    }
+
+    $limit = 'LIMIT ' . ($page_num - 1) * $users_par_page . ',' . $users_par_page;
+
+    $users = getListUsers($page_num, $limit);
+
+    $pagination = '<nav><ul class="pagination justify-content-center">';
+    if ($total_page != 1) {
+        if ($page_num > 1) {
+            $previous = $page_num - 1;
+            $pagination .= '<li class="page-item"><a class="page-link" href="index.php?p=admin&id=' . $previous . '">Précédent</a></li>';
+            for ($i = $page_num - $beforeafter; $i < $page_num; $i++) {
+                if ($i > 0) {
+                    $pagination .= '<li class="page-item"><a class="page-link"  href="index.php?p=admin&id=' . $i . '">' . $i . '</a></li>';
+                }
+            }
+        }
+        $pagination .= '<li class="page-item active"><a class="page-link"  href="#">' . $page_num . '</a></li>';
+        for ($i = $page_num + 1; $i <= $total_page; $i++) {
+            $pagination .= '<li class="page-item"><a class="page-link" href="index.php?p=admin&id=' . $i . '">' . $i . '</a></li> ';
+
+            if ($i >= $page_num + $beforeafter) {
+                break;
+            }
+        }
+        if ($page_num != $total_page) {
+            $next = $page_num + 1;
+            $pagination .= '<li class="page-item"><a class="page-link" href="index.php?p=admin&id=' . $next . '">Suivant</a></li> ';
+        }
+    }
+    $pagination .='</ul></nav>';
+} else {
+    set_flash('Aucun articles pour le moment', 'info');
+    redirect('home');
+}
 //update information provided by the form
 if (isset($_POST['updateInfo'])) {
     //if fields have been fullfilled
     if (not_empty(['manager', 'userid'])) {
-        $errors=[];      
+        $errors=[];
         
         $manager = e($_POST['manager']);
         $active  = e($_POST['active']);

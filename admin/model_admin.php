@@ -101,16 +101,30 @@ if (!function_exists('deleteCommentAdm')) {
 
 //get a list of users
 if (!function_exists('getListUsers')) {
-    function getListUsers()
+    function getListUsers($page_num, $limit)
     {
         $db = getConnect();
         $q = $db->prepare("SELECT users.id AS usered, username, email, active, manager, city, country, twitter, github, avatar, DATE_FORMAT(create_time, '%d/%m/%Y') AS usersdate 
-                          FROM users
-                          ORDER BY active AND username DESC"
-    );
-        $q->execute();
+                          FROM users                          
+                          ORDER BY username AND active ASC $limit");
+        $q->execute([$page_num]);   
+       
         $users = $q->fetchAll(PDO::FETCH_OBJ);
+        $q->closeCursor();
         return $users;
+    }
+}
+
+// get total users
+if (!function_exists('getTotalUsers')) {
+    function getTotalUsers()
+    {
+        $db = getConnect();
+        $q = $db->query("SELECT users.id AS countid
+                           FROM users");
+        $countusers = $q->rowCount();
+        $q->closeCursor();
+        return $countusers;
     }
 }
 

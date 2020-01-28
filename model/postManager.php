@@ -10,7 +10,7 @@ if (!function_exists('getTotalPosts')) {
         $db = getConnect();
         $q = $db->query("SELECT post.id
                            FROM post
-                           WHERE statut='1'");
+                           WHERE statut = '1'");
         $countposts = $q->rowCount();
         $q->closeCursor();
         return $countposts;

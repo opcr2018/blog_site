@@ -39,7 +39,7 @@
     </div>
   </div>
   <?php endforeach; ?>
-  <div id="pagination"><?= $pagination ?>
+  <div class="mx-auto" id="pagination"><?= $pagination ?>
         </div>
 </div>
 

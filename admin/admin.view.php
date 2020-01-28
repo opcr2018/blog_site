@@ -193,7 +193,6 @@
           <input class="btn btn-info btn-sm" type="submit" aria-label="Mettre à jour" id="updateInfo" name="updateInfo"
             value="Enregistrer">
           </form>
-
 </div>
 </td>
 </tr>
@@ -201,9 +200,9 @@
 <?php else :?>
 <td>il n'y a pas d'utilisateurs enregistrés.</td>
 <?php endif; ?>
-
 </tbody>
 </table>
+<div class="mx-auto" id="pagination"><?= $pagination ?>
 </div>
 <?php $contentPage = ob_get_clean();
 include(VIEW . 'template.php');

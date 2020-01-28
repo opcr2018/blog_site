@@ -27,7 +27,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <form method="POST" class="well col d-flex justify-content-center "
+                                    <form method="POST" class="well col d-flex justify-content-center"
                                         autocomplete="off">
                                         <div class="col-md-9">
                                             <div class="form-group col-md-12">

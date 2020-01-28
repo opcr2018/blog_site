@@ -17,7 +17,7 @@ if (!function_exists('getPosts')) {
     function getPosts()
     {
         $db = getConnect();
-        $q = $db->prepare("SELECT id AS posted, user_id AS userid, title, detail, DATE_FORMAT(created_date, '%d/%m/%Y à %Hh%imin') AS date_fr
+        $q = $db->prepare("SELECT id AS posted, user_id AS userid, title, detail, img, DATE_FORMAT(created_date, '%d/%m/%Y à %Hh%imin') AS date_fr
                            FROM  post
                            WHERE post.user_id = :user_id
                            ORDER BY created_date ASC");

@@ -24,6 +24,11 @@ body, html{
     max-height: 60%;
 }
 
+.img-subtitle-md
+{
+    max-width: 100%;
+    max-height: 100%;
+}
 
 /*style for tiles listPost */
 #tiles{

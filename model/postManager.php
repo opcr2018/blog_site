@@ -31,59 +31,26 @@ if (!function_exists('getListPost')) {
         $q->execute([$page_num]);
         $posts = $q->fetchAll(PDO::FETCH_OBJ); 
         
-        return $posts;
-       
-    }
-}
-
-//get all comments
-if (!function_exists('getListComment')) {
-    function getListComment()
-    {
-        $db = getConnect();
-        $q = $db->prepare("SELECT  comment.id, author, email, commContent, post_id, DATE_FORMAT(comment.created_date, '%d/%m/%Y à %Hh%imin') AS dated, post.title AS postitle
-                           FROM comment
-                           LEFT OUTER JOIN post ON post_id = post.id
-                           WHERE valide = '1'                           
-                           ORDER BY comment.created_date DESC LIMIT 5");
-        $q->execute();
-        $comments = $q->fetchAll(PDO::FETCH_OBJ);
-        return $comments;
-    }
-}
-
-//find the author by id
-if (!function_exists('getAuthor')) {
-    function getAuthor()
-    {
-        $db = getConnect();
-        $q = $db->prepare("SELECT user_id FROM post 
-                   WHERE id = :id");
-        $q->execute(
-            ['id' => $_GET['id']]
-        );
-        $author = $q->fetch(PDO::FETCH_OBJ);
-        return $author;
+        return $posts;       
     }
 }
 
 
 //==========================================
-// C.R.U.D.
+// Posts
 //==========================================
 
 //create a post
 if (!function_exists('addPost')) {
-    function addPost()
+    function addPost($title, $detail, $postContent)
     {
         $db = getConnect();
-        $q = $db->prepare("INSERT INTO post(img, title, postContent, detail,  user_id, created_date)
-                           VALUES(:img, :title, :postContent, :detail,  :user_id, NOW())");
+        $q = $db->prepare("INSERT INTO post(title, postContent, detail,  user_id, created_date)
+                           VALUES(:title, :postContent, :detail,  :user_id, NOW())");
         $q->execute([
-            'img'           => empty(e($_POST['linkImg'])) ? '' : e($_POST['linkImg']),
-            'title'         => e($_POST['title']),
-            'postContent'   => e($_POST['postContent']),
-            'detail'        => e($_POST['detail']),
+            'title'         => $title,
+            'postContent'   => $postContent,
+            'detail'        => $detail,
             'user_id'       => get_session('user_id')
         ]);
     }
@@ -112,22 +79,19 @@ if (!function_exists('updatePost')) {
     {
         $db = getConnect();
         $q = $db->prepare("UPDATE post
-                           SET img = :img, title = :title, statut = :statut, postContent = :postContent, detail = :detail,
+                           SET title = :title, statut = :statut, postContent = :postContent, detail = :detail,
                            user_id = :user_id, update_time = NOW()
                            WHERE id = :id");
         $q->execute([
-            'img'           => empty(e($_POST['linkImg'])) ? '' : e($_POST['linkImg']),
             'title'         => e($_POST['title']),
             'postContent'   => e($_POST['postContent']),
             'detail'        => e($_POST['detail']),
             'statut'        => !empty($_POST['statut']) ? '1' : '0',
             'user_id'       => get_session('user_id'),
             'id'            => $_GET['id']
-
          ]);
     }
 }
-
 
 //delete a post
 if (!function_exists('deletePost')) {
@@ -142,7 +106,54 @@ if (!function_exists('deletePost')) {
     }
 }
 
+//find the author by id
+if (!function_exists('getAuthor')) {
+    function getAuthor()
+    {
+        $db = getConnect();
+        $q = $db->prepare("SELECT user_id, img FROM post 
+                   WHERE id = :id");
+        $q->execute(
+            ['id' => $_GET['id']]
+        );
+        $author = $q->fetch(PDO::FETCH_OBJ);
+        return $author;
+    }
+}
 
+if (!function_exists('uploadPicture')) {
+    function uploadPicture($targetFolder, $file_rand_name)
+    {
+        $db = getConnect();
+        $q = $db->prepare("UPDATE post
+        SET img = :img
+        WHERE id = :id");
+        $q->execute([
+            'img' => $targetFolder.'/'.$file_rand_name,
+            'id'  => $_GET['id']        
+]);
+    }
+}
+
+//==========================================
+// Comments
+//==========================================
+
+//get all comments
+if (!function_exists('getListComment')) {
+    function getListComment()
+    {
+        $db = getConnect();
+        $q = $db->prepare("SELECT  comment.id, author, email, commContent, post_id, DATE_FORMAT(comment.created_date, '%d/%m/%Y à %Hh%imin') AS dated, post.title AS postitle
+                           FROM comment
+                           LEFT OUTER JOIN post ON post_id = post.id
+                           WHERE valide = '1'                           
+                           ORDER BY comment.created_date DESC LIMIT 5");
+        $q->execute();
+        $comments = $q->fetchAll(PDO::FETCH_OBJ);
+        return $comments;
+    }
+}
 
 //add a comment
 if (!function_exists('addComment')) {
@@ -177,20 +188,5 @@ if (!function_exists('getComment')) {
         );
         $comments = $q->fetchAll(PDO::FETCH_OBJ);
         return $comments;
-    }
-}
-
-//upload an img
-if (!function_exists('uploadImg')) {
-    function uploadImg()
-    {
-        $db = getConnect();
-        $q = $db->prepare("UPDATE post
-                               SET img = :img
-                               WHERE id = :id");
-        $q->execute([
-            'img' => 'uploads/' . md5(uniqid(rand())) . strrchr($_FILES['img']['name'], "."),
-            'id'     => $_GET['id']
-        ]);
     }
 }

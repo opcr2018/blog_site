@@ -15,7 +15,7 @@
       <?php if (is_logged_in()) : //display when the user is logged?>
       <ul class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img
-            src="<?= get_session('avatar') ? $user->avatar : get_avatar_url(get_session('email'), 50) ?>"
+            src="<?= get_session('avatar') ? get_session('avatar') : get_avatar_url(get_session('email'), 50) ?>"
             alt="image de profil de <?= get_session('username') ?>"
             class="avatar-xs"></a>
         <ul class="dropdown-menu dropdown-menu-lg-right">

@@ -7,15 +7,16 @@
     <div class="row">
       <div class="col-md-6">
         <div class="card">
-        
+
           <?php include(VIEW . 'elements/_errors.php'); ?>
           <?php if ($user->manager === 'A' && !empty($_GET['id']) && $_GET['id'] === get_session('user_id')) : ?>
-            <h5 class="card-header">Profil de <?= e($user->username) ?>&nbsp;&nbsp;     
+          <h5 class="card-header">Profil de <?= e($user->username) ?>&nbsp;&nbsp;
             <a class="btn btn-danger btn-sm"
               href="index.php?p=admin&id=<?= $user->id; ?>">
               Administration</a>
-          <?php else : ?>
-          <?php endif; ?></h5> 
+            <?php else : ?>
+            <?php endif; ?>
+          </h5>
           <div class="card-body row">
             <p class="card-text col-md-6"><img
                 src="<?= $user->avatar ? $user->avatar : get_avatar_url($user->email, 50)?>"
@@ -68,7 +69,18 @@
             <?php if (!empty($posts)) :?>
             <?php foreach ($posts as $post) : ?>
             <h4 class="card-title">
-              <a href="index.php?p=post&id=<?= $post->posted ?>"><?= e($post->title); ?></a>
+              <a href="index.php?p=post&id=<?= $post->posted ?>">
+                <div class="row">
+                  <div class="col-md-6"><?= e($post->title); ?></div>
+                  <div class="col-md-5" >
+                       <?= $post->img
+                        ? '<img class="roundoad img-subtitle-md" src="'. $post->img .'" alt="'. $post->title.'" />'
+                        : '<img class="img-subtitle-md" src="uploads/default.jpg" alt="'. $post->title.'"/>';
+                    ?>
+                  </div>              
+                </div>
+              </a>
+              <p>
             </h4>
             <p><?= e($post->detail); ?>
             </p>

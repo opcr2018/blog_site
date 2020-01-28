@@ -15,7 +15,7 @@ if (!empty($_GET['id']) && $_GET['id'] === get_session('user_id')) {
     //if fields have been fullfilled
         if (not_empty(['title','detail','postContent'])) {
             $errors = [];
-             
+           
             $title          = e($_POST['title']);
             $detail         = e($_POST['detail']);
             $postContent    = e($_POST['postContent']);
@@ -27,9 +27,10 @@ if (!empty($_GET['id']) && $_GET['id'] === get_session('user_id')) {
             if (mb_strlen($detail) < 6) {
                 $errors[] = "Votre résumé n'est pas assez long (Minimum 6 caractères)";
             }
+                        
+            addPost($title, $detail, $postContent);
 
-            addPost();
-            set_flash("Votre article a bien été enregistré");
+            set_flash("Votre article a été envoyé à la modération, merci de bien vouloir patienter...");
             redirect('profil&id='.get_session('user_id'));
         } else {
             save_input_data();
@@ -39,4 +40,6 @@ if (!empty($_GET['id']) && $_GET['id'] === get_session('user_id')) {
         clear_input_data();
     }
 }
+
+
 require(VIEW.'add_post.view.php');

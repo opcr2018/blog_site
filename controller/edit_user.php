@@ -1,6 +1,6 @@
 <?php
 filter_guest();
-require(MODEL.'edit_userManager.php');
+require(MODEL.'profilManager.php');
 
 if (!empty($_GET['id']) && $_GET['id'] === get_session('user_id')) {
     //recuperer les infos d'user en bdd

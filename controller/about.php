@@ -1,1 +1,13 @@
-<?php include(VIEW.'about.view.php');
+<?php
+filter_guest();
+
+
+
+
+
+
+
+
+
+include(VIEW.'about.view.php');
+

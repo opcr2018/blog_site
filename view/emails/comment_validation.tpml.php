@@ -7,17 +7,14 @@
 </head>
 
 <body>
-    <div id="main-content">
-        <div class="container">
-            <div class="jumbotron">
-                <h1>Validation de commentaire </h1>
-                <p> Un nouveau commentaire en attente de validation ! <br /></p>
-                <p> Hop hop hop ! Au boulot ! <br /></p>
-                <p> Bonne journée ! </p>
-            </div>
-
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Validation de commentaire </h1>
+            <p> Un nouveau commentaire en attente de validation ! <br /></p>
+            <p> Hop hop hop ! Au boulot ! <br /></p>
+            <p> Bonne journée ! </p>
         </div>
-
+    </div>
 </body>
 
 </html>

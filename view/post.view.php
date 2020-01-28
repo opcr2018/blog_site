@@ -25,15 +25,15 @@
   <form class="form-horizontal" method="POST" autocomplete="off">
     <fieldset>
       <!-- Form Name -->
-      
+
       <legend>Laissez un commentaire</legend>
       <input type="hidden" id="post_id" name="post_id"
         value="<?= e($_GET['id']); ?>" />
-        <div class="form-group">
+      <div class="form-group">
         <label class="col-md-6 control-label" for="commContent">Commentaire : </label>
         <div class="col-md-6">
-          <textarea class="form-control" id="commContent" name="commContent" type="text" minlength="10" maxlength="140" rows="5"
-            placeholder="Votre message" ></textarea>
+          <textarea class="form-control" id="commContent" name="commContent" type="text" minlength="10" maxlength="140"
+            rows="5" placeholder="Votre message"></textarea>
         </div>
       </div>
       <!-- Button -->
@@ -44,7 +44,7 @@
         </div>
       </div>
     </fieldset>
-            
+
   </form>
 </div>
 
@@ -61,14 +61,13 @@
           </h4>
           <p>
             <i class="fa fa-clock-o"></i>
-            <span class="timed"
-              title="<?= e($comment->dated) ?>">
+            <span class="timed" title="<?= e($comment->dated) ?>">
               <?= e($comment->dated) ?>
             </span>
           </p>
           <p>
             <?= nl2br(e($comment->commContent)) ?><br /><br />
-          </p> 
+          </p>
         </div>
       </article>
       <?php endforeach; ?>

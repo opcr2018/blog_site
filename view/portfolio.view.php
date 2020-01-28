@@ -23,4 +23,4 @@
 
 
 <?php $contentPage = ob_get_clean();
-include(VIEW . 'template.php'); ?>
+include(VIEW . 'template.php');

@@ -40,7 +40,7 @@
   </div>
   <?php endforeach; ?>
   <div class="mx-auto" id="pagination"><?= $pagination ?>
-        </div>
+  </div>
 </div>
 
 <?php $contentPage = ob_get_clean();

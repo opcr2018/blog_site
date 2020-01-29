@@ -7,6 +7,55 @@ body, html{
     padding-top: 50px;
 }
 
+ul li
+{
+    padding-left: 1em;
+    margin-left: 1em;
+}
+
+.liststyle1
+{
+    list-style-type: '\1F58D' ;
+}
+
+.liststyle1-2
+{
+    list-style-type: '\1F4BB' ;
+}
+
+
+.liststyle2
+{
+    list-style-type: '\1F50C' ;
+}
+
+.liststyle2-2
+{
+    list-style-type: '\1F9F0' ;
+}
+
+.liststyle2-3
+{
+    list-style-type: '💾' ;
+}
+
+.liststyle2-4
+{
+    list-style-type: '\1F5F9' ;
+}
+
+.liststyle3
+{
+    list-style-type: '' ;
+}
+
+.liststyle4
+{
+    list-style-type: none ;
+}
+
+
+
 .avatar-md{
     border-radius: 25%;
     height: 100px;

@@ -10,7 +10,9 @@
   <div class="card">
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
-        Formation <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#formation"
+        <em>
+          Formation
+        </em>  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#formation"
           aria-expanded="true" aria-controls="formation">
           🔻
         </button>
@@ -38,7 +40,9 @@
   <div class="card">
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
-        Compétences<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#competence"
+        <em>
+          Compétences
+        </em> <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#competence"
           aria-expanded="false" aria-controls="competence">🔻
         </button>
       </h2>
@@ -118,7 +122,9 @@
     <div class="card">
       <div class="card-header" id="headingThree">
         <h2 class="mb-0">
-          Expériences professionnelles
+         <em>
+           Expériences professionnelles
+         </em> 
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#experience"
             aria-expanded="false" aria-controls="experience">🔻
           </button>
@@ -143,7 +149,9 @@
     <div class="card">
       <div class="card-header" id="headingFour">
         <h2 class="mb-0">
-          Divers
+          <em>
+            Divers
+          </em> 
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#divers"
             aria-expanded="false" aria-controls="divers">🔻
           </button>

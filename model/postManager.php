@@ -86,7 +86,7 @@ if (!function_exists('updatePost')) {
             'title'         => e($_POST['title']),
             'postContent'   => e($_POST['postContent']),
             'detail'        => e($_POST['detail']),
-            'statut'        => !empty($_POST['statut']) ? '1' : '0',
+            'statut'        => '0',
             'user_id'       => get_session('user_id'),
             'id'            => $_GET['id']
          ]);

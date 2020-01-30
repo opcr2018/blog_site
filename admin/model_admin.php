@@ -106,7 +106,7 @@ if (!function_exists('getListUsers')) {
         $db = getConnect();
         $q = $db->prepare("SELECT users.id AS usered, username, email, active, manager, city, country, twitter, github, avatar, DATE_FORMAT(create_time, '%d/%m/%Y') AS usersdate 
                           FROM users                          
-                          ORDER BY username AND active ASC $limit");
+                          ORDER BY username ASC $limit");
         $q->execute([$page_num]);   
        
         $users = $q->fetchAll(PDO::FETCH_OBJ);

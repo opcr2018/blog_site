@@ -17,14 +17,6 @@
 </div>
 <form method="POST" class="well" autocomplete="off">
     <div class="form-group col-md-12">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="statut" id="statut" value="1">
-            <label class="form-check-label" for="statut">
-                Publié
-            </label>
-        </div>
-    </div>
-    <div class="form-group col-md-12">
         <label class="control-label" for="title">Titre <span class="text-danger">*</span></label>
         <input type="text" value="<?= $post->title; ?>"
             class="form-control" id="title" name="title" required="required" />

@@ -43,6 +43,18 @@
         </div>
       </div>
     </div>
+  
+  <div class="row">
+      <div class="card border-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-body">
+          <h4 class="card-title">Contactez-Moi</h4>
+          <p class="card-text">Vous pouvez utiliser le formulaire pour m'envoyer un message.</p>
+          <button type="button" class="btn btn-outline-secondary">
+            <a href="index.php?p=contact">N'hésitez pas !</a>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="col-sm-6">
     <p>

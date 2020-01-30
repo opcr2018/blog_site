@@ -6,17 +6,16 @@ $post = getPost($_GET['id']);
 
 if (isset($_POST['edit']) ) {
     //if fields have been fullfilled
-    if (not_empty(['title','detail','statut', 'postContent'])) {
+    if (not_empty(['title','detail', 'postContent'])) {
         $errors = [];
              
         $title          = e($_POST['title']);
         $detail         = e($_POST['detail']);
         $postContent    = e($_POST['postContent']);
-        $statut         = e($_POST['statut']);
 
         updatePost();
 
-        set_flash("L'article a été modifié.");
+        set_flash("Votre article a été envoyé à la modération et sera prochainement validé.");
         redirect('profil&id='.get_session('user_id'));
     } else {
         save_input_data();

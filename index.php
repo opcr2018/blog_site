@@ -84,6 +84,13 @@ switch ($p) {
          include(CONTROLLER.'edit_user.php');
         break;
     }
+
+    case 'contact':
+        {
+             include(CONTROLLER.'contact.php');
+            break;
+        }
+
     default:
     {
         include(VIEW.'404.php');

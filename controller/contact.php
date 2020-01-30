@@ -14,8 +14,9 @@ if (isset($_POST['contact'])) {
 
         $mailcontent = e($_POST['mailcontent']);
 
-        if (mb_strlen($username) < 3) {
-            $errors[] = "Pseudo trop court (Minimum 3 caractères)";
+        $pattern = " /^[a-zA-Z]{3,15}$/";
+        if (!preg_match($pattern, $username)) {
+            $errors[] = "Pseudo invalide";
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

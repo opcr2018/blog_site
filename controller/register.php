@@ -15,7 +15,7 @@ if (isset($_POST['register'])) {
         $password_confirm = htmlspecialchars($_POST['password_confirm']);
 
         // var_dump($password, $password_confirm);
-        // die();        
+        // die();
         
         if (mb_strlen($username) < 3) {
             $errors[] = "Pseudo trop court (Minimum 3 caractères)";
@@ -30,7 +30,7 @@ if (isset($_POST['register'])) {
         } else {
             if ($password != $password_confirm) {
                 $errors[] = "Les deux mot de passe ne concordent pas !";
-            }       
+            }
         }
 
         if (is_already_in_use('name', $name, 'users')) {

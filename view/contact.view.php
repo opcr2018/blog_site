@@ -1,19 +1,17 @@
 <?php $title = 'Contactez-moi'; ?>
 <?php ob_start(); ?>
 
-<?php include(VIEW.'elements/_errors.php'); ?>
-
 <div class="row">
     <div class="col-md-6">
-        <form method="POST" class="well" autocomplete="on">
+        <form  method="POST" class="well" autocomplete="on">
             <h1 class="lead">Pour me contacter, rien de plus simple, envoyez-moi un message !</h1><br />
+            <?php include(VIEW.'elements/_errors.php'); ?>
             <!-- username field -->
             <div class="form-group">
                 <label class="control-label" for="username">Pseudo : <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="username" name="username" required="required" value="<?= is_logged_in()
                         ? get_session('username')
-                        : get_input('username') ?>" 
-                     />
+                        : get_input('username') ?>" />
             </div>
             <!-- Email field -->
             <div class="form-group">

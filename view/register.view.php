@@ -5,7 +5,7 @@
 
 <?php include(VIEW.'elements/_errors.php'); ?>
 
-<form method="POST" class="well col-md-6" autocomplete="off">
+<form action="index.php?p=register" method="POST" class="well col-md-6" autocomplete="off">
 
     <!-- Name field -->
     <div class="form-group">

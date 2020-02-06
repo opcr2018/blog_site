@@ -1,6 +1,6 @@
 <?php
 filter_loath();
-require(MODEL.'registerManager.php');
+require(MODEL . 'registerManager.php');
 
 //Si le formulaire a été soumis
 if (isset($_POST['register'])) {
@@ -8,15 +8,12 @@ if (isset($_POST['register'])) {
     //Si tous les champs ont été complétés
     if (not_empty(['name', 'username', 'email', 'password', 'password_confirm'])) {
         $errors = [];
-        $name             = e($_POST['name']);
-        $username         = e($_POST['username']);
-        $email            = e($_POST['email']);
-        $password         = htmlspecialchars($_POST['password']);
+        $name = e($_POST['name']);
+        $username = e($_POST['username']);
+        $email = e($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
         $password_confirm = htmlspecialchars($_POST['password_confirm']);
 
-        // var_dump($password, $password_confirm);
-        // die();
-        
         if (mb_strlen($username) < 3) {
             $errors[] = "Pseudo trop court (Minimum 3 caractères)";
         }
@@ -52,10 +49,9 @@ if (isset($_POST['register'])) {
             $subject = WEBSITE_NAME . " - ACTIVATION DE COMPTE";
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT, array($options = 12));
             $token = sha1($_POST['pseudo'] . $_POST['email'] . $password);
-            
 
             ob_start();
-            require(VIEW.'emails/admin_activation.tpml.php');
+            require(VIEW . 'emails/admin_activation.tpml.php');
             $content = ob_get_clean();
 
             $headers = 'MIME-VERSION: 1.0' . "\r\n";
@@ -63,27 +59,8 @@ if (isset($_POST['register'])) {
 
             mail($to, $subject, $content, $headers);
 
-
-            //notification admin
+            //notification
             set_flash("Votre compte est en cours de validation, merci de patienter.", 'success');
-            
-            //Mail send to validate the account by user
-            // $to = $_POST['email'];
-            // $subject = WEBSITE_NAME . " - ACTIVATION DE COMPTE";
-            
-            // $token = sha1($_POST['username'] . $_POST['email'] . $password);
-
-            // ob_start();
-            // require(VIEW.'emails/user_activation.tpml.php');
-            // $content = ob_get_clean();
-
-            // $headers = 'MIME-VERSION: 1.0' . "\r\n";
-            // $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-            // mail($to, $subject, $content, $headers);
-
-            // //notification
-            // set_flash("Veuillez vérifier vos email pour valider votre compte.", 'success');
 
             //add user in bdd
             adduser();
@@ -100,4 +77,4 @@ if (isset($_POST['register'])) {
     clear_input_data();
 }
 
-include(VIEW.'register.view.php');
+include VIEW . 'register.view.php';

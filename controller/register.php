@@ -7,12 +7,12 @@ if (isset($_POST['register'])) {
 
     //Si tous les champs ont été complétés
     if (not_empty(['name', 'username', 'email', 'password', 'password_confirm'])) {
-        $errors = [];
-        $name = e($_POST['name']);
-        $username = e($_POST['username']);
-        $email = e($_POST['email']);
-        $password = htmlspecialchars($_POST['password']);
-        $password_confirm = htmlspecialchars($_POST['password_confirm']);
+        $errors             = [];
+        $name               = e($_POST['name']);
+        $username           = e($_POST['username']);
+        $email              = e($_POST['email']);
+        $password           = e($_POST['password']);
+        $password_confirm   = e($_POST['password_confirm']);
 
         if (mb_strlen($username) < 3) {
             $errors[] = "Pseudo trop court (Minimum 3 caractères)";
@@ -45,10 +45,10 @@ if (isset($_POST['register'])) {
         if (count($errors) == 0) {
 
             //Mail send to validate the account by admin
-            $to = MAIL_ADMIN;
-            $subject = WEBSITE_NAME . " - ACTIVATION DE COMPTE";
-            $password = password_hash($_POST['password'], PASSWORD_BCRYPT, array($options = 12));
-            $token = sha1($_POST['pseudo'] . $_POST['email'] . $password);
+            $to         = MAIL_ADMIN;
+            $subject    = WEBSITE_NAME . " - ACTIVATION DE COMPTE";
+            $password   = password_hash($_POST['password'], PASSWORD_BCRYPT, array($options = 12));
+            $token      = sha1($_POST['pseudo'] . $_POST['email'] . $password);
 
             ob_start();
             require(VIEW . 'emails/admin_activation.tpml.php');

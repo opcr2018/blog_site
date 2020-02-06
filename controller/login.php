@@ -9,12 +9,11 @@ if (isset($_POST['login'])) {
     if (not_empty(['identifiant', 'password'])) {
         $errors = [];
         $identifiant = e($_POST['identifiant']);
-        $password = htmlspecialchars($_POST['password']);
-        $user = verifyLogin();
+        $password = e($_POST['password']);
+        $user = verifyLogin($identifiant, $password);
 
-        // var_dump($password, $user);
-        // die();
-        if ($user) {
+        
+        if ($user && password_verify($password, $user->pass)) {
             $_SESSION['user_id']  = $user->id;
             $_SESSION['username'] = $user->username;
             $_SESSION['email']    = $user->email;

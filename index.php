@@ -58,6 +58,10 @@ switch ($p) {
         include(CONTROLLER.'login.php');
         break;
     }
+    case 'changepass':
+        include(CONTROLLER.'change_password.php');
+        break;
+        
     case 'logout':
     {
         include(CONTROLLER.'logout.php');

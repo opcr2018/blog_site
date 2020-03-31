@@ -8,7 +8,7 @@ if (!function_exists('getListPostAdm')) {
     function getListPostAdm()
     {
         $db = getConnect();
-        $q = $db->prepare("SELECT post.id AS posted, img, title, detail, statut, users.username AS username, DATE_FORMAT(post.update_time, '%d/%m/%Y') AS date_fr
+        $q = $db->prepare("SELECT post.id AS posted, img, title, detail, statut, users.username AS username, users.active AS activate, DATE_FORMAT(post.update_time, '%d/%m/%Y') AS date_fr
                            FROM post
                            LEFT OUTER JOIN users ON users.id = post.user_id
                            WHERE statut ='0'
@@ -106,7 +106,7 @@ if (!function_exists('getListUsers')) {
         $db = getConnect();
         $q = $db->prepare("SELECT users.id AS usered, username, email, active, manager, city, country, twitter, github, avatar, DATE_FORMAT(create_time, '%d/%m/%Y') AS usersdate 
                           FROM users                          
-                          ORDER BY username ASC $limit");
+                          ORDER BY active ASC $limit");
         $q->execute([$page_num]);   
        
         $users = $q->fetchAll(PDO::FETCH_OBJ);

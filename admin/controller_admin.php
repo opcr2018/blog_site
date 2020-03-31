@@ -149,6 +149,9 @@ if (isset($_POST['updateInfo'])) {
     clear_input_data();
 }
 
-
+//update statut of the posts
+if (isset($activate == 'N')) {
+    # code...
+}
 
 include(ADMIN.'admin.view.php');
